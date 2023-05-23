@@ -12,6 +12,7 @@ import cn.dev33.satoken.context.SaTokenContext;
  */
 public class SaTokenContextRegister {
 
+//	标记一下注册的是SaTokenContextForSpring springboot 启动的时候会自动加载这个bean
 	/**
 	 * 获取上下文Bean (Spring版)
 	 * 

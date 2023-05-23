@@ -1,6 +1,7 @@
 package com.pj.cases.use;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.dev33.satoken.stp.StpUtil;
@@ -50,7 +51,7 @@ public class KickoutController {
 	
 	// 根据 Token 值踢人    ---- http://localhost:8081/kickout/kickoutByTokenValue?tokenValue=xxxx-xxxx-xxxx-xxxx已登录账号的token值
 	@RequestMapping("kickoutByTokenValue")
-	public SaResult kickoutByTokenValue(String tokenValue) {
+	public SaResult kickoutByTokenValue(@RequestParam("tokenValue") String tokenValue) {
 		
 		StpUtil.kickoutByTokenValue(tokenValue);
 		

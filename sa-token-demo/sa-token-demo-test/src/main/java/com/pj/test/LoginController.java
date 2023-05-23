@@ -1,6 +1,7 @@
 package com.pj.test;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.dev33.satoken.stp.StpUtil;
@@ -17,7 +18,7 @@ public class LoginController {
 
 	// 测试登录  ---- http://localhost:8081/acc/doLogin?name=zhang&pwd=123456
 	@RequestMapping("doLogin")
-	public SaResult doLogin(String name, String pwd) {
+	public SaResult doLogin(@RequestParam("name") String name, @RequestParam("pwd") String pwd) {
 		// 此处仅作模拟示例，真实项目需要从数据库中查询数据进行比对 
 		if("zhang".equals(name) && "123456".equals(pwd)) {
 			StpUtil.login(10001);
@@ -42,6 +43,12 @@ public class LoginController {
 	@RequestMapping("logout")
 	public SaResult logout() {
 		StpUtil.logout();
+		return SaResult.ok();
+	}
+
+	@RequestMapping("kickout")
+	public SaResult kickout() {
+		StpUtil.kickout(10001);
 		return SaResult.ok();
 	}
 	

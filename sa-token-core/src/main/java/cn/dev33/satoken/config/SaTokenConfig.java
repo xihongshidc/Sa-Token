@@ -26,6 +26,7 @@ public class SaTokenConfig implements Serializable {
 	 * token临时有效期 [指定时间内无操作就视为token过期] (单位: 秒), 默认-1 代表不限制
 	 * (例如可以设置为1800代表30分钟内无操作就过期)
 	 */
+
 	private long activityTimeout = -1;
 
 	/** 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录) */

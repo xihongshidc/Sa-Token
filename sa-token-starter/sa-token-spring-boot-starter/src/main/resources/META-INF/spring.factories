@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.dev33.satoken.spring.SaTokenContextRegister
+cn.dev33.satoken.spring.SaTokenContextRegister,\
+cn.dev33.satoken.spring.AutoConfigurationTest

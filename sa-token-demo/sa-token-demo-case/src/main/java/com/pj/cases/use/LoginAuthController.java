@@ -27,8 +27,9 @@ public class LoginAuthController {
 			
 			// 第二步：根据账号id，进行登录 
 			// 		此处填入的参数应该保持用户表唯一，比如用户id，不可以直接填入整个 User 对象 
-			StpUtil.login(10001);
-			
+//			StpUtil.login(10001);
+			StpUtil.login(10001,false);
+
 			// SaResult 是 Sa-Token 中对返回结果的简单封装，下面的示例将不再赘述 
 			return SaResult.ok("登录成功");
 		}

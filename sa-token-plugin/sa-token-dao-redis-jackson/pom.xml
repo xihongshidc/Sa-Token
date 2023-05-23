@@ -18,6 +18,7 @@
 
 	<dependencies>
 		<!-- sa-token-spring-boot-starter -->
+<!--    实现接口 SaTokenDao -->
 		<dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-core</artifactId>

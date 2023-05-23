@@ -1,5 +1,6 @@
 package com.pj.satoken;
 
+import cn.dev33.satoken.SaManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,37 +30,38 @@ public class SaTokenConfigure implements WebMvcConfigurer {
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		// 注册 Sa-Token 拦截器打开注解鉴权功能 
+		// 注册 Sa-Token 拦截器打开注解鉴权功能
 		registry.addInterceptor(new SaInterceptor(handle -> {
-			// SaManager.getLog().debug("----- 请求path={}  提交token={}", SaHolder.getRequest().getRequestPath(), StpUtil.getTokenValue());
-			
+//			 SaManager.getLog().debug("----- 请求path={}  提交token={}", SaHolder.getRequest().getRequestPath(), StpUtil.getTokenValue());
+			System.out.println("进来了... "+ SaHolder.getRequest().getRequestPath());
 			// 指定一条 match 规则
             SaRouter
-                .match("/user/**")    // 拦截的 path 列表，可以写多个 
-                .notMatch("/user/doLogin", "/user/doLogin2")     // 排除掉的 path 列表，可以写多个 
-                .check(r -> StpUtil.checkLogin());        // 要执行的校验动作，可以写完整的 lambda 表达式 
+                .match("/user/**")    // 拦截的 path 列表，可以写多个
+                .notMatch("/user/doLogin", "/user/doLogin2")     // 排除掉的 path 列表，可以写多个
+                .check(r -> StpUtil.checkLogin());        // 要执行的校验动作，可以写完整的 lambda 表达式
 
-            // 权限校验 -- 不同模块认证不同权限 
+            // 权限校验 -- 不同模块认证不同权限
             SaRouter.match("/admin/**", r -> StpUtil.checkPermission("admin"));
             SaRouter.match("/goods/**", r -> StpUtil.checkPermission("goods"));
-            SaRouter.match("/orders/**", r -> StpUtil.checkPermission("orders"));
-            SaRouter.match("/notice/**", r -> StpUtil.checkPermission("notice"));
-            SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
+			SaRouter.match("/orders/**", r -> StpUtil.checkPermission("orders"));
+			SaRouter.match("/notice/**", r -> StpUtil.checkPermission("notice"));
+			SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
 
+//			SaRouter.match("/acc/**", r -> System.out.println("登录请求"));
 			// 甚至你可以随意的写一个打印语句
 			SaRouter.match("/router/print", r -> System.out.println("----啦啦啦----"));
 
-			// 写一个完整的 lambda 
+			// 写一个完整的 lambda
 			SaRouter.match("/router/print2", r -> {
 				System.out.println("----啦啦啦2----");
-				// ... 其它代码 
+				// ... 其它代码
 			});
-			
+
 			/*
-			 * 相关路由都定义在 com.pj.cases.use.RouterCheckController 中 
+			 * 相关路由都定义在 com.pj.cases.use.RouterCheckController 中
 			 */
 			
-		})).addPathPatterns("/**");
+		}).isAnnotation(false)).addPathPatterns("/user/**").excludePathPatterns("/favicon.ico","/user/doLogin").excludePathPatterns("/error");
 		
 	}
 	
@@ -98,6 +100,9 @@ public class SaTokenConfigure implements WebMvcConfigurer {
         		.setBeforeAuth(r -> {
         			// ---------- 设置一些安全响应头 ----------
         			SaHolder.getResponse()
+//				因为SaHolder调用了SaManager.getSaTokenContext()，得到了SaTokenContext才可以通过getResponse方法获取SaResponse，
+//				而SaTokenContext的真实身份其实是SaTokenContextForSpring，SaTokenContextForSpring重写了getResponse，
+//				就是在这个方法去调用Spring的Response。
         			// 服务器名称 
         			.setServer("sa-server")
         			// 是否可以在iframe显示视图： DENY=不可以 | SAMEORIGIN=同域下可以 | ALLOW-FROM uri=指定域名下可以 

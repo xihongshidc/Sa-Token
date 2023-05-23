@@ -178,6 +178,7 @@ public class StpLogic {
 				.setHttpOnly(cfg.getHttpOnly())
 				.setSameSite(cfg.getSameSite())
 				;
+		//添加自定义的cookie到浏览器
 		SaHolder.getResponse().addCookie(cookie);
 	}
 
@@ -1648,6 +1649,12 @@ public class StpLogic {
 		} else {
 			this.checkRoleOr(roleArray);	
 		}
+	}
+
+	public static void main(String[] args) {
+		String[] arr= {"admin, manager, staff"};
+
+		System.out.println(arr.length);
 	}
 	
 	/**

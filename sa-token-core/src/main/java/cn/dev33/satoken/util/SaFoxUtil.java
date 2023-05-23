@@ -244,7 +244,13 @@ public class SaFoxUtil {
 			return patt.equals(str);
 		}
 		// 正则匹配
-		return Pattern.matches(patt.replaceAll("\\*", ".*"), str);
+//		正则表达式中.代表任意字符,* 代表出现任意次,  将* 替换为.*可以匹配任意字符串,
+		String regex = patt.replaceAll("\\*", ".*");
+		return Pattern.matches(regex, str);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(vagueMatch("c.*", "c.c"));
 	}
 
 	/**

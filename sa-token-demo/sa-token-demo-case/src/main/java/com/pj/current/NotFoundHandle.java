@@ -18,10 +18,10 @@ import cn.dev33.satoken.util.SaResult;
 @RestController
 public class NotFoundHandle implements ErrorController {
 
-	@RequestMapping("/error")
-    public Object error(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.setStatus(200);
-        return SaResult.get(404, "not found", null);
-    }
-	
+//	@RequestMapping("/error")
+//    public Object error(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//		response.setStatus(200);
+//        return SaResult.get(404, "not found", null);
+//    }
+//
 }

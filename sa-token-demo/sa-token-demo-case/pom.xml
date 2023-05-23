@@ -40,6 +40,7 @@
         </dependency>
         
 		<!-- Sa-Token整合 Redis (使用jackson序列化方式) -->
+<!--	导入jacksonredis 标记一下-->
 		<dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-dao-redis-jackson</artifactId>

@@ -1,5 +1,6 @@
 package com.pj.cases.test;
 
+import cn.dev33.satoken.annotation.SaIgnore;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import cn.dev33.satoken.util.SaResult;
 @RequestMapping("/test/")
 public class TestController {
 
+	@SaIgnore
 	// 测试   浏览器访问： http://localhost:8081/test/test
 	@RequestMapping("test")
 	public SaResult test() {

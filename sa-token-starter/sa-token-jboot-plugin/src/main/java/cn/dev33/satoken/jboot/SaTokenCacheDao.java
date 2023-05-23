@@ -154,7 +154,9 @@ public class SaTokenCacheDao implements SaTokenDao {
     }
 
     @Override
-    public void setObject(String key, Object object, long timeout) {
+    public void
+
+    setObject(String key, Object object, long timeout) {
         if (timeout == 0 || timeout <= SaTokenDao.NOT_VALUE_EXPIRE) {
             return;
         }
